@@ -9,7 +9,8 @@ This is a task management application (to-do list) build with:
   - TailwindCSS
   - Axios
   - HeadlessUI
-  - Zod
+  - Eslint
+  - Prettier
 
 - Server
   - Prisma
@@ -17,6 +18,7 @@ This is a task management application (to-do list) build with:
   - Typescript
   - Zod
   - Fastify
+  - Prettier
 
 ### Get started:
 
