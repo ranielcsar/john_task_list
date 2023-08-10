@@ -1,8 +1,9 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
-import { QueryProvider } from './QueryProvider'
 import { ToastContainer } from 'react-toastify'
+
+import { QueryProvider } from './QueryProvider'
 import 'react-toastify/dist/ReactToastify.css'
 
 const roboto = Roboto({

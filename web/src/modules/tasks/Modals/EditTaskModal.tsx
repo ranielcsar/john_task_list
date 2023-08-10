@@ -1,17 +1,19 @@
 'use client'
 
-import { PlusIcon } from '@/assets/icons/plusIcon'
-import { Button } from '@/components/Button'
-import { Modal } from '@/components/Modal'
-import { TextInput } from '@/components/TextInput'
-import { api } from '@/services/api'
-import { SubtaskProps, TaskProps } from '@/types'
 import { FormEvent, useEffect, useState } from 'react'
 
-import styles from '../scrollbar.module.css'
-import { Checkbox } from '@/components/Checkbox'
+import { PlusIcon } from '@/assets/icons/plusIcon'
 import { TrashIcon } from '@/assets/icons/trashIcon'
+import { Button } from '@/components/Button'
+import { Checkbox } from '@/components/Checkbox'
+import { Modal } from '@/components/Modal'
+import { TextInput } from '@/components/TextInput'
 import { useToast } from '@/hooks/useToast'
+import { api } from '@/services/api'
+import { SubtaskProps, TaskProps } from '@/types'
+
+import styles from '../scrollbar.module.css'
+
 
 type EditTaskModalProps = {
   isOpen: boolean
@@ -189,7 +191,7 @@ function TaskInput({ value }: { value: string }) {
   return (
     <TextInput
       placeholder="Subtask title..."
-      name={`subtask`}
+      name={'subtask'}
       className="w-[61vw] md:w-[18.1rem]"
       value={taskValue}
       onChange={(evt) => setTaskValue(evt.target.value)}

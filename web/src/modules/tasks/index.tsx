@@ -1,6 +1,6 @@
-import { TaskList } from './TaskList'
-import { OrderTasks } from './OrderTasks'
 import { NewTaskModal } from './Modals'
+import { OrderTasks } from './OrderTasks'
+import { TaskList } from './TaskList'
 
 export async function Tasks() {
   return (

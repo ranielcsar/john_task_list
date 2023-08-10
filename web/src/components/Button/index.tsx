@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes } from 'react'
+
 import { twMerge } from 'tailwind-merge'
 
 export function Button({ className, ...rest }: ButtonHTMLAttributes<HTMLButtonElement>) {

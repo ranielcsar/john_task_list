@@ -1,10 +1,11 @@
+import { FormEvent } from 'react'
+
 import { TrashIcon } from '@/assets/icons/trashIcon'
 import { Button } from '@/components/Button'
 import { Modal } from '@/components/Modal'
 import { useToast } from '@/hooks/useToast'
 import { api } from '@/services/api'
 import { TaskProps } from '@/types'
-import { FormEvent } from 'react'
 
 type DeleteTaskModalProps = {
   isOpen: boolean

@@ -1,7 +1,8 @@
 'use client'
 
-import { authStore } from '@/services/auth'
 import { useEffect } from 'react'
+
+import { authStore } from '@/services/auth'
 
 export function TokenOnAuth({ token }: { token: string }) {
   const { setToken } = authStore()

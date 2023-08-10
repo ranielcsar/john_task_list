@@ -1,16 +1,17 @@
 'use client'
 
+import { FormEvent, useState } from 'react'
+
 import { PlusIcon } from '@/assets/icons/plusIcon'
 import { Button } from '@/components/Button'
 import { Modal } from '@/components/Modal'
 import { TextInput } from '@/components/TextInput'
+import { useToast } from '@/hooks/useToast'
 import { api } from '@/services/api'
 import { SubtaskProps } from '@/types'
-import { FormEvent, useState } from 'react'
 
-import styles from '../scrollbar.module.css'
 import { useTasks } from '../TaskList/hooks/useTasks'
-import { useToast } from '@/hooks/useToast'
+import styles from '../scrollbar.module.css'
 
 export function NewTaskModal() {
   const [openModal, setOpenModal] = useState(false)
@@ -124,7 +125,7 @@ function TaskInput() {
   return (
     <TextInput
       placeholder="Subtask title..."
-      name={`subtask`}
+      name={'subtask'}
       value={value}
       onChange={(evt) => setValue(evt.target.value)}
     />

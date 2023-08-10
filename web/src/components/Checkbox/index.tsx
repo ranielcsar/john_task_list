@@ -1,4 +1,5 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react'
+
 import { twMerge } from 'tailwind-merge'
 
 export function Checkbox({
