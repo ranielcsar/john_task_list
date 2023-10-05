@@ -10,14 +10,21 @@ import { useToast } from '@/hooks/useToast'
 import { api } from '@/services/api'
 import { SubtaskProps } from '@/types'
 
-import { useTasks } from '../TaskList/hooks/useTasks'
 import styles from '../scrollbar.module.css'
 
-export function NewTaskModal() {
+export function NewTaskModal({ refetchTasks }: { refetchTasks: () => void }) {
   const [openModal, setOpenModal] = useState(false)
   const [subtasks, setSubtasks] = useState([] as Omit<SubtaskProps, 'id'>[])
-  const { refetch: refetchTasks } = useTasks({})
   const { toast } = useToast()
+
+  const handleNewSubtask = () => {
+    setSubtasks((subtasks) => [...subtasks, { hasCompleted: false, title: '' }])
+  }
+
+  const reset = () => {
+    setOpenModal(false)
+    setSubtasks([])
+  }
 
   const handleSubmit = async (evt: FormEvent) => {
     evt.preventDefault()
@@ -38,7 +45,8 @@ export function NewTaskModal() {
         subtasks: newSubtasks,
       }
       const response = await api.post('/tasks', newTask)
-      if (response.data) {
+
+      if (response) {
         reset()
         refetchTasks()
         toast('Task created', { type: 'success' })
@@ -50,20 +58,11 @@ export function NewTaskModal() {
     }
   }
 
-  const handleNewSubtask = () => {
-    setSubtasks((subtasks) => [...subtasks, { hasCompleted: false, title: '' }])
-  }
-
-  const reset = () => {
-    setOpenModal(false)
-    setSubtasks([])
-  }
-
   return (
     <>
       <Button
         onClick={() => setOpenModal(true)}
-        className="group rounded-full border-2 border-dashed border-black bg-neutral-50 p-0 transition-colors hover:bg-lime-500 hover:text-black"
+        className="group absolute right-10 top-[7.2rem] rounded-full border-2 border-dashed border-black bg-neutral-50 p-0 transition-colors hover:bg-lime-500 hover:text-black"
       >
         <span className="h-8 w-8 text-lime-500 group-hover:text-black">
           <PlusIcon />

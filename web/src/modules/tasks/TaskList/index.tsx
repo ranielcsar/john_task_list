@@ -4,19 +4,20 @@ import { useEffect, useState } from 'react'
 import { Disclosure, Transition } from '@headlessui/react'
 import dayjs from 'dayjs'
 
-import { CheckIcon } from '@/assets/icons/checkIcon'
-import { ChevronUpIcon } from '@/assets/icons/chevronUp'
-import { PencilIcon } from '@/assets/icons/pencilIcon'
-import { SortIcon } from '@/assets/icons/sortIcon'
-import { ThreeDotIcon } from '@/assets/icons/threeDotIcon'
-import { TrashIcon } from '@/assets/icons/trashIcon'
-import { Checkbox } from '@/components/Checkbox'
-import { Dropdown, DropdownItem } from '@/components/Dropdown'
+import {
+  CheckIcon,
+  ChevronUpIcon,
+  PencilIcon,
+  SortIcon,
+  ThreeDotIcon,
+  TrashIcon,
+} from '@/assets/icons'
+import { Checkbox, Dropdown, DropdownItem } from '@/components'
 import { useToast } from '@/hooks/useToast'
 import { api } from '@/services/api'
 import { TaskProps } from '@/types'
 
-import { DeleteTaskModal, EditTaskModal } from '../Modals'
+import { DeleteTaskModal, EditTaskModal, NewTaskModal } from '../Modals'
 import styles from '../scrollbar.module.css'
 import { useTasksStore } from '../store'
 
@@ -37,9 +38,7 @@ export function TaskList() {
   const { toast } = useToast()
 
   useEffect(() => {
-    if (tasks) {
-      setFilteredTasks(tasks as TaskProps[])
-    }
+    setFilteredTasks(tasks as TaskProps[])
   }, [tasks])
 
   useEffect(() => {
@@ -104,39 +103,43 @@ export function TaskList() {
   }
 
   return (
-    <section className="relative">
-      <SortMenu setOrders={setOrders} />
+    <>
+      <section className="relative">
+        <SortMenu setOrders={setOrders} />
 
-      <div
-        className={`max-h-[70vh] overflow-y-auto ${styles.custom_scroll} flex flex-col`}
-      >
-        {filteredTasks?.length === 0 ? (
-          <h3 className="mt-6 text-center text-xl">No Tasks</h3>
-        ) : (
-          filteredTasks?.map((task) => (
-            <Task
-              key={task.title}
-              task={task}
-              handleHasCompletedTask={handleHasCompletedTask}
-            />
-          ))
-        )}
-      </div>
+        <div
+          className={`max-h-[70vh] overflow-y-auto ${styles.custom_scroll} flex flex-col`}
+        >
+          {filteredTasks?.length === 0 ? (
+            <h3 className="mt-6 text-center text-xl">No Tasks</h3>
+          ) : (
+            filteredTasks?.map((task) => (
+              <Task
+                key={task.title}
+                task={task}
+                handleHasCompletedTask={handleHasCompletedTask}
+              />
+            ))
+          )}
+        </div>
 
-      <EditTaskModal
-        isOpen={!!taskToEdit}
-        onClose={() => setTaskToEdit(null)}
-        task={taskToEdit}
-        refetchTasks={refetchTasks}
-      />
+        <EditTaskModal
+          isOpen={!!taskToEdit}
+          onClose={() => setTaskToEdit(null)}
+          task={taskToEdit}
+          refetchTasks={refetchTasks}
+        />
 
-      <DeleteTaskModal
-        isOpen={!!taskToDelete}
-        onClose={() => setTaskToDelete(null)}
-        task={taskToDelete}
-        refetchTasks={refetchTasks}
-      />
-    </section>
+        <DeleteTaskModal
+          isOpen={!!taskToDelete}
+          onClose={() => setTaskToDelete(null)}
+          task={taskToDelete}
+          refetchTasks={refetchTasks}
+        />
+      </section>
+
+      <NewTaskModal refetchTasks={refetchTasks} />
+    </>
   )
 }
 

@@ -1,9 +1,10 @@
-import { api } from "@/services/api"
-import { TaskProps } from "@/types"
-import { QueryKey, useQuery } from "@tanstack/react-query"
+import { QueryKey, useQuery } from '@tanstack/react-query'
+
+import { api } from '@/services/api'
+import { TaskProps } from '@/types'
 
 async function getTasks({ queryKey }: { queryKey: QueryKey }) {
-  const [_key, { titleOrder = 'asc', dateOrder = 'asc' }] = queryKey as any
+  const [_, { titleOrder = 'asc', dateOrder = 'asc' }] = queryKey as any
 
   try {
     const response = await api.get('/tasks', { params: { titleOrder, dateOrder } })
@@ -16,12 +17,16 @@ async function getTasks({ queryKey }: { queryKey: QueryKey }) {
   }
 }
 
-export type UseTasksParams = Partial<{ titleOrder: 'asc' | 'desc', dateOrder: 'asc' | 'desc' }>
+export type UseTasksParams = Partial<{
+  titleOrder: 'asc' | 'desc'
+  dateOrder: 'asc' | 'desc'
+}>
 
 export function useTasks({ titleOrder, dateOrder }: UseTasksParams) {
-  const { isFetching, data, refetch } = useQuery(
-    { queryKey: ['tasks', { titleOrder, dateOrder }], queryFn: getTasks },
-  )
+  const { isFetching, data, refetch } = useQuery({
+    queryKey: ['tasks', { titleOrder, dateOrder }],
+    queryFn: getTasks,
+  })
 
   return { loading: isFetching, data, refetch }
 }
