@@ -45,10 +45,10 @@ export function getTasks(app: FastifyInstance) {
     const tasks = await prisma.task.findMany({
       orderBy: [
         {
-          createdAt: dateOrder,
+          createdAt: dateOrder ?? 'asc',
         },
         {
-          title: titleOrder,
+          title: titleOrder ?? 'asc',
         },
       ],
       include: {
@@ -131,7 +131,7 @@ function updateTask(app: FastifyInstance) {
 
     let newHasCompleted = false
     const allCompleted = subtasksToUpdate.every(
-      (subtask) => subtask.data.hasCompleted === true,
+      (subtask) => subtask.data.hasCompleted === true
     )
 
     if (subtasksToCreate.length === 0 || subtasksToDelete.length === 0) {
@@ -181,7 +181,7 @@ function deleteTask(app: FastifyInstance) {
 
 export async function taskRoutes(app: FastifyInstance) {
   app.addHook('preHandler', async (request) => {
-    await request.jwtVerify()
+    // await request.jwtVerify()
   })
 
   createTask(app)

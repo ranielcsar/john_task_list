@@ -8,7 +8,7 @@ import { taskRoutes } from './routes'
 export const app = fastify()
 
 app.register(cors, {
-  origin: true,
+  origin: '*',
 })
 
 app.register(jwt, {
@@ -23,7 +23,7 @@ app.get('/token', async () => {
     {
       sub: '123',
       expiresIn: '30 days',
-    },
+    }
   )
 
   return {
